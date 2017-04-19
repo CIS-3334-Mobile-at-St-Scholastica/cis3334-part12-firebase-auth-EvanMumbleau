@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //creates the login button
         buttonCreateLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Create Account ");
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //creates the Google log in button
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Google login ");
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //creates the singout button
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.d("CIS3334", "Logging out - signOut ");
@@ -80,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // checking if user is auth.
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -99,12 +103,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // adds AuthStateListener when started
     @Override
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
+    // removes AuthStateListener when stopped
     @Override
     public void onStop() {
         super.onStop();
@@ -113,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // creates Account, uses email and password
     private void createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -133,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    //signs in with user email and password
     private void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
